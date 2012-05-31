@@ -6,7 +6,7 @@ require 'version'
  
 Gem::Specification.new do |s|
   s.name        = "opinionated"
-  s.version     = Reamaze::Opinionated::VERSION
+  s.version     = Reamaze::Opinionated::VERSION::STRING
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Lu Wang"]
   s.email       = ["lwang@reamaze.com"]
