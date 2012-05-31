@@ -17,4 +17,7 @@ Gem::Specification.new do |s|
  
   s.files        = Dir.glob("{bin,lib}/**/*") + %w(MIT-LICENSE README.md Gemfile Gemfile.lock Rakefile)
   s.require_path = 'lib'
+
+  s.add_dependency 'rails', '>= 3.1.0'
+  s.add_dependency 'activerecord-postgres-hstore', '>= 0.3.0'
 end
