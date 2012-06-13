@@ -1,6 +1,6 @@
 module Reamaze
   module Opinionated
-    class Hash < ::Hash
+    class PrefHash < Hash
       def initialize(owner, preferential)
         @owner = owner
         @preferential = preferential

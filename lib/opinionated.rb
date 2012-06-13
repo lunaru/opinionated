@@ -36,7 +36,7 @@ module Reamaze
           eval(
             <<-EOS
               def #{preferential}
-                h = Reamaze::Opinionated::Hash.new self, "#{preferential}"
+                h = Reamaze::Opinionated::PrefHash.new self, "#{preferential}"
                 h.replace self["#{preferential}"].from_hstore if self["#{preferential}"]
                 h
               end
