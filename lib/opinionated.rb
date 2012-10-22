@@ -28,7 +28,7 @@ module Reamaze
         raise ArgumentError, "#{self} class already preferences :#{preferential} defined" if self.preferential_configuration.has_key?(preferential)
 
         configuration = Configuration.new(self, preferential, options)
-        yield configuration
+        yield configuration if block_given?
         preferential_configuration[preferential] = configuration
 
         # override hstore Hash with a custom Hash
@@ -42,6 +42,25 @@ module Reamaze
               end
             EOS
           )
+        end
+        
+        # add form accessible attributes
+        configuration.definitions.values.each do |definition|
+          class_eval do 
+            eval(
+              <<-EOS
+                def #{preferential}_#{definition.name}=(value)
+                  set_preferential('#{preferential}', '#{definition.name}', value, true)
+                end
+                def #{preferential}_#{definition.name}
+                  get_preferential('#{preferential}', '#{definition.name}', true)
+                end
+                def #{preferential}_#{definition.name}?
+                  !!get_preferential('#{preferential}', '#{definition.name}', true)
+                end
+              EOS
+            )
+          end
         end
       end
     end
