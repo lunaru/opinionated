@@ -37,7 +37,7 @@ module Reamaze
             <<-EOS
               def #{preferential}
                 h = Reamaze::Opinionated::PrefHash.new self, "#{preferential}"
-                h.replace self["#{preferential}"].from_hstore if self["#{preferential}"]
+                h.replace self["#{preferential}"] if self["#{preferential}"]
                 h
               end
             EOS
@@ -101,7 +101,7 @@ module Reamaze
         value = definition.preprocess.call(value) if do_preprocess and definition and definition.has_preprocess
 
         # Invoke the association
-        prefs = ::Hash[self[preferential].from_hstore] if self[preferential]
+        prefs = ::Hash[self[preferential]] if self[preferential]
 
         if prefs.blank?
           send(preferential + '=', {name => value})
@@ -126,7 +126,7 @@ module Reamaze
         definition = configuration.definitions[name]
 
         # Invoke the association
-        prefs = self[preferential].from_hstore if self[preferential]
+        prefs = self[preferential] if self[preferential]
         prefs = {} if prefs.blank?
 
         # Try to find what they are looking for
