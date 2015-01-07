@@ -133,7 +133,7 @@ module Reamaze
         pref = prefs[name]
 
         # If the pref isn't found, try to fallback on a default
-        if pref.blank? and definition
+        if pref.nil? and definition
           # TODO break all these nested if statements out into helper methods, i like prettier code
           # TODO raise an exception if we don't respond to default_through or the resulting object doesn't respond to the preferential
           if definition.has_default_through and respond_to?(definition.default_through) and (through = send(definition.default_through)).blank? == false
