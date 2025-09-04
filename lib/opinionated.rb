@@ -140,7 +140,7 @@ module Reamaze
             value = through.send(preferential)[name]
           elsif definition.has_default_dynamic
             if definition.default_dynamic.instance_of?(Proc)
-              value = definition.default_dynamic.call(self)
+              value = definition.default_dynamic.call(self, preferential, name)
             else
               # TODO raise an exception if we don't respond to default_dynamic
               value = send(definition.default_dynamic)
